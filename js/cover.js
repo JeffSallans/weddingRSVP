@@ -12,24 +12,59 @@ $(function () {
 	            return sParameterName[1];
 	        }
 	    }
-	}​
+	}
 
-	$(".toggle-yes").click(function() {
+	var rsvpBox = function() {
+		var scope = this;
 
-		$(".selectedYes").show()
-	});
 
-	$(".toggle-no").click(function() {
+		//Form variables
+		scope.nameOfParty = ko.observable("none");
+		scope.isAttending = ko.observable(true);
 
-		$(".selectedYes").hide()
-	});
+		var numberOfPossibleAttendees = ko.observable(0);
+		scope.possibleAttendeesOptions = ko.computed(function() {
+			var resultArray = [];
+			for (var i = 1; i <= numberOfPossibleAttendees(); i++) {
+				resultArray.push(i);
+			};
+			return resultArray;
+		})
+		scope.numberAttending = ko.observable(undefined);
 
-	function parseUrlParam() {
+		scope.visibleSetting = function() {
 
-		$(".nameOfParty").val(GetURLParameter("name"));
+			if (isAttending()) return "visible";
+			return "hidden";
+		};
 
-		var numberOfPossibleAttendees = GetURLParameter("number");
+		//Used to convert URL parameters into inital form values
+		scope.parseUrlParam = function() {
 
-		
+			var queryString = GetURLParameter("q") || '';
+
+			var nameAndNumber = $.parseParams( decodeURIComponent( window.atob(queryString)));
+
+			scope.nameOfParty(nameAndNumber.name);
+
+			numberOfPossibleAttendees(nameAndNumber.number);
+		};
+
+		scope.submit = function() {
+
+			if (scope.isAttending() && !scope.numberAttending()) {
+
+				alert("Please Select Number Attending.");
+				return;
+			}
+
+			alert("ajax call");
+		}
+
+		return scope;
 	}();
+
+	ko.applyBindings(rsvpBox);
+
+	rsvpBox.parseUrlParam();
 });

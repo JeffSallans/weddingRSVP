@@ -165,10 +165,6 @@ input[type="radio"].toggle:checked + label {
     text-shadow: 0 1px 1px rgba(40, 40, 40, 0.75);
 }
 
-input[type="radio"].toggle + label {
-    width: 3em;
-}
-
 input[type="radio"].toggle:checked + label.btn:hover {
     background-color: inherit;
     background-position: 0 0;
@@ -194,4 +190,55 @@ input[type="radio"].toggle-right + label {
     -moz-border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+}
+
+select {
+  color: black;
+}
+
+.banner {
+  font-family: 'Playball', serif;
+}
+
+.banner div {
+  font-size: 70px;
+}
+
+.banner div:nth-child(2) {
+  font-size: 50px;
+}
+
+.infobar {
+  position: absolute;
+  left: 0;
+  height: 80px;
+  width: 100%;
+
+  color: black;
+  background-color: white;
+
+  z-index: 3;
+
+}
+
+.formbox {
+  border: 2px white solid;
+  background-color: #000040;
+  padding: 10px;
+  width: 400px;
+  z-index: 4;
+  margin: 0 auto;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.formbox label, .formbox select, .formbox button {
+  margin: 4px;
+}
+
+.formbox select {
+  font-size: 20px;
+  height: 40px;
 }
